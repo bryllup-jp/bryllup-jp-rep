@@ -140,7 +140,10 @@ form.addEventListener('submit', async (e) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     });
-    if (!response.ok) throw new Error(`status ${response.status}`);
+    if (!response.ok) {
+      const detail = await response.text();
+      throw new Error(`status ${response.status}: ${detail}`);
+    }
     status.textContent = "Thank you! Your reply has reached us.";
     form.reset();
     updateDetailVisibility();
