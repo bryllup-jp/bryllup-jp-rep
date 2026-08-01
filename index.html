@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Vorname] &amp; [Vorname] — Wir heiraten</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="board" id="board">
+
+  <!-- Umschlag „you're invited" -> oeffnet das RSVP-Formular als Pop-up -->
+  <button class="item item--envelope" style="--x:51%; --y:20%; --rot:-1deg; --z:6;"
+          data-open="rsvp" aria-haspopup="dialog">
+    <img src="images/envelope.png" alt="Einladung - hier antworten">
+    <span class="item-hint">antippen zum Antworten</span>
+  </button>
+
+  <!-- Kassette „wedding playlist" -> Link zur Playlist -->
+  <a class="item item--cassette" style="--x:17%; --y:46%; --rot:-2deg; --z:3;"
+     href="https://open.spotify.com/playlist/DEINE_PLAYLIST_ID" target="_blank" rel="noopener">
+    <img src="images/cassette.png" alt="Zur Hochzeits-Playlist">
+    <span class="item-hint">Song vorschlagen &#8599;</span>
+  </a>
+
+  <!-- Polaroid -> Wir / Willkommen -->
+  <button class="item item--polaroid" style="--x:46%; --y:50%; --rot:1deg; --z:7;"
+          data-open="us" aria-haspopup="dialog">
+    <img src="images/polaroid.png" alt="Wir zwei">
+  </button>
+
+  <!-- LIPP-Flyer -> Zeremonie & Dinner -->
+  <button class="item item--lipp" style="--x:82%; --y:46%; --rot:2deg; --z:4;"
+          data-open="ceremony" aria-haspopup="dialog">
+    <img src="images/lipp.png" alt="Zeremonie und Dinner">
+  </button>
+
+  <!-- Gebaeude -> Unterkuenfte -->
+  <button class="item item--building" style="--x:50%; --y:86%; --rot:-2deg; --z:2;"
+          data-open="stay" aria-haspopup="dialog">
+    <img src="images/building.png" alt="Unterkuenfte">
+  </button>
+
+  <!-- Play/Pause -> "Trolltog (March of the Trolls)" von Edvard Grieg -->
+  <button class="item item--troll" style="--x:100%; --y:101%; --rot:0deg; --z:5;"
+          id="troll-audio-btn" aria-pressed="false" aria-label="Musik abspielen: March of the Trolls">
+    <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+    <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+  </button>
+  <audio id="troll-audio" src="audio/march-of-the-trolls.mp3" preload="none"></audio>
+
+  <!-- Silber-Dose -> Afterparty -->
+  <button class="item item--eyes" style="--x:80%; --y:69%; --rot:3deg; --z:1;"
+          data-open="afterparty" aria-haspopup="dialog">
+    <img src="images/eyes.png" alt="Afterparty">
+  </button>
+
+  <!-- Ticket -> Anreise -->
+  <button class="item item--ticket" style="--x:18%; --y:77%; --rot:-3deg; --z:1;"
+          data-open="travel" aria-haspopup="dialog">
+    <img src="images/ticket.png" alt="Anreise">
+  </button>
+
+</main>
+
+<!-- ---------- INFO-MODAL (olivgruen, halbtransparent) ---------- -->
+<div class="modal-overlay" id="info-overlay" hidden>
+  <div class="modal-panel modal-panel--info" role="dialog" aria-modal="true">
+    <button class="modal-close" data-close aria-label="Schliessen">&times;</button>
+    <span class="modal-stamp" id="info-stamp"></span>
+    <div class="modal-body" id="info-body"></div>
+  </div>
+</div>
+
+<!-- ---------- RSVP-MODAL (Pop-up nach Klick auf den Umschlag) ---------- -->
+<div class="modal-overlay" id="rsvp-overlay" hidden>
+  <div class="modal-panel modal-panel--rsvp" role="dialog" aria-modal="true" aria-label="RSVP form">
+    <button class="modal-close" data-close aria-label="Close">&times;</button>
+    <form class="postcard" id="rsvp-form">
+      <div class="postcard-header">
+        <span class="postcard-title">RSVP</span>
+        <span class="postcard-stamp">&#9993;</span>
+      </div>
+
+      <fieldset class="attend-toggle">
+        <legend>Will you be joining us?</legend>
+        <label class="radio-pill">
+          <input type="radio" name="attending" value="yes" checked required>
+          <span>Yes, I will come!</span>
+        </label>
+        <label class="radio-pill">
+          <input type="radio" name="attending" value="no">
+          <span>Unfortunately, I can't make it</span>
+        </label>
+      </fieldset>
+
+      <div class="field-grid">
+        <label class="field">
+          <span>First name</span>
+          <input type="text" name="firstName" required placeholder="First name">
+        </label>
+        <label class="field">
+          <span>Surname</span>
+          <input type="text" name="lastName" required placeholder="Surname">
+        </label>
+        <label class="field field-wide">
+          <span>Email address</span>
+          <input type="email" name="email" required placeholder="you@example.com">
+        </label>
+      </div>
+
+      <div class="field-grid" id="rsvp-details">
+        <label class="field">
+          <span>Dietary preference</span>
+          <select name="food" required>
+            <option value="" disabled selected>Choose one</option>
+            <option value="everything">I eat everything</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="vegan">Vegan</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Allergies / notes</span>
+          <input type="text" name="foodNotes" placeholder="optional">
+        </label>
+        <fieldset class="attend-toggle field-wide">
+          <legend>I will join for the:</legend>
+          <label class="radio-pill">
+            <input type="checkbox" name="events" value="rehearsal-dinner">
+            <span>Rehearsal Dinner (02.07.)</span>
+          </label>
+          <label class="radio-pill">
+            <input type="checkbox" name="events" value="wedding-dinner">
+            <span>Wedding Dinner (03.07.)</span>
+          </label>
+          <label class="radio-pill">
+            <input type="checkbox" name="events" value="sunday-picnic">
+            <span>Sunday Picnic (04.07.)</span>
+          </label>
+        </fieldset>
+
+        <fieldset class="attend-toggle field-wide">
+          <legend>I will bring a car:</legend>
+          <label class="radio-pill">
+            <input type="radio" name="car" value="yes">
+            <span>Yes</span>
+          </label>
+          <label class="radio-pill">
+            <input type="radio" name="car" value="no">
+            <span>No</span>
+          </label>
+        </fieldset>
+      </div>
+
+      <label class="field">
+        <span>Message to us</span>
+        <textarea name="message" rows="3" placeholder="Anything else you'd like to tell us?"></textarea>
+        <span class="field-note" id="kids-note">Bringing kids along? Let us know here, and how many :)</span>
+      </label>
+
+      <button type="submit" class="postcard-submit">Send RSVP</button>
+      <p class="form-status" id="form-status" role="status"></p>
+    </form>
+  </div>
+</div>
+
+<!-- Inhalte fuer die Info-Modals -->
+<template id="content-us">
+  <h3>Schoen, dass ihr da seid</h3>
+  <p>Wir freuen uns riesig, mit euch zu feiern. Hier findet ihr nach und nach alle Infos rund um unseren Tag - klickt euch einfach durch die Karten.</p>
+</template>
+<template id="content-travel">
+  <h3>Wie ihr zu uns findet</h3>
+  <p>Der naechste Bahnhof ist [Bahnhof], von dort fahren Shuttles ab 14 Uhr. Parkplaetze gibt es direkt am [Ort].</p>
+  <p class="small">Adresse: [Strasse Hausnummer, PLZ Ort]</p>
+  <a class="pill-link" href="https://maps.google.com/?q=" target="_blank" rel="noopener">Route oeffnen &#8599;</a>
+</template>
+<template id="content-ceremony">
+  <h3>16:00 Uhr - Trauung</h3>
+  <p>[Kirche / Location], [Strasse Hausnummer, PLZ Ort]. Bitte seid 15 Minuten vorher da.</p>
+  <h3>19:00 Uhr - Dinner</h3>
+  <p>Im Anschluss feiern wir im [Venue-Name] weiter - nur zwei Gehminuten entfernt.</p>
+</template>
+<template id="content-stay">
+  <h3>Uebernachten</h3>
+  <p>Vor Ort gibt es Stellplaetze fuer Zelt und Van sowie ein paar Huetten. In der Naehe liegt ausserdem das [Hotelname].</p>
+  <p class="small">Buchungslinks und Details tragen wir hier bald ein.</p>
+</template>
+<template id="content-afterparty">
+  <h3>Die Nacht gehoert uns</h3>
+  <p>Ab 22 Uhr geht's weiter in den Huetten direkt nebenan - Feuerkorb, Musik, gute Gesellschaft.</p>
+</template>
+
+<script src="script.js"></script>
+</body>
+</html>

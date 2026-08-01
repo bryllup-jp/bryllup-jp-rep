@@ -1,0 +1,248 @@
+:root{
+  --off-yellow: #fefde4;
+  --olive: #69830c;
+  --olive-dark: #4f6209;
+  --maroon: #6d2121;
+  --slate: #5f687a;
+  --slate-dark: #454d5c;
+  --ink: #2c2a1e;
+  --radius: 3px;
+  --shadow: 0 8px 20px rgba(40,35,20,.28);
+}
+
+*{ box-sizing:border-box; }
+html,body{ margin:0; width:100%; }
+html{
+  /* Hintergrund aus der PPTX (gestreiftes Papier) - auf <html>, damit es
+     garantiert die volle Viewport-Breite abdeckt (kein background-attachment:fixed,
+     das ist auf mobilen Browsern unzuverlaessig) */
+  background-color:#f3ecc9;
+  background-image:url('images/bg-stripes.png');
+  background-size:100% auto;
+  background-repeat:repeat-y;
+  min-height:100%;
+}
+body{
+  font-family:'Cormorant Garamond', serif;
+  color:var(--ink);
+  min-height:100vh;
+}
+
+/* ---------- BOARD ---------- */
+/* Portrait-Flaeche im Seitenverhaeltnis der PPTX (A4), zentriert */
+.board{
+  position:relative;
+  /* moeglichst gross: durch die Hoehe begrenzt (fast volle Viewport-Hoehe),
+     sonst durch die Breite. Haelt das A4-Hochformat der Vorlage. */
+  width:min(97vw, 64vh);
+  aspect-ratio: 6858 / 9906;
+  margin:1.5vh auto 5vh;
+}
+
+.item{
+  position:absolute;
+  left:var(--x, 50%);
+  top:var(--y, 50%);
+  z-index:var(--z, 1);
+  transform: translate(-50%,-50%) rotate(var(--rot, 0deg));
+  border:none;
+  background:none;
+  padding:0;
+  cursor:pointer;
+  transition: transform .25s ease, filter .25s ease;
+  line-height:0;
+}
+.item img{
+  width:100%;
+  height:auto;
+  display:block;
+  filter: drop-shadow(0 10px 22px rgba(40,35,20,.55));
+}
+.item:hover, .item:focus-visible{
+  transform: translate(-50%,-50%) rotate(var(--rot, 0deg)) scale(1.05);
+  z-index:20;
+  outline:none;
+}
+.item:hover img, .item:focus-visible img{
+  filter: drop-shadow(0 14px 26px rgba(40,35,20,.45));
+}
+
+/* Groessen der einzelnen Objekte (% der Board-Breite) */
+.item--envelope { width:44%; }
+.item--cassette { width:25%; }
+.item--polaroid { width:40%; }
+.item--lipp     { width:30%; }
+.item--building { width:28%; }
+.item--eyes     { width:33%; }
+.item--ticket   { width:32%; }
+.item--troll{
+  width:9%;
+  aspect-ratio:1/1;
+  border-radius:50%;
+  background:var(--slate);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 8px 16px rgba(40,35,20,.4);
+  transition: background .2s, transform .25s ease;
+}
+.item--troll svg{ width:52%; height:52%; fill:var(--off-yellow); }
+.item--troll svg[hidden]{ display:none; }
+.item--troll:hover, .item--troll:focus-visible{ background:var(--slate-dark); }
+.item--troll.is-playing{ background:var(--slate-dark); }
+
+.item-hint{
+  position:absolute;
+  left:50%; bottom:-1.4em;
+  transform:translateX(-50%);
+  font-family:'Caveat', cursive;
+  font-size:1rem;
+  line-height:1.1;
+  white-space:nowrap;
+  color:var(--maroon);
+  opacity:0;
+  transition:opacity .2s;
+  pointer-events:none;
+}
+.item:hover .item-hint, .item:focus-visible .item-hint{ opacity:.9; }
+
+/* ---------- MODALS ---------- */
+.modal-overlay{
+  position:fixed; inset:0;
+  background: rgba(30,28,15,.45);
+  display:flex; align-items:center; justify-content:center;
+  padding:1.2em;
+  z-index:100;
+}
+.modal-overlay[hidden]{ display:none; }
+
+.modal-panel{
+  position:relative;
+  border-radius:var(--radius);
+  box-shadow: 0 20px 48px rgba(0,0,0,.4);
+  animation: modal-in .25s cubic-bezier(.6,.1,.3,1);
+  max-height:86vh;
+  overflow-y:auto;
+}
+@keyframes modal-in{
+  from{ opacity:0; transform: scale(.94); }
+  to{ opacity:1; transform: scale(1); }
+}
+
+.modal-close{
+  position:absolute; top:.5em; right:.6em;
+  width:2em; height:2em;
+  border:none; border-radius:50%;
+  background: rgba(0,0,0,.12);
+  color:inherit;
+  font-size:1.3rem; line-height:1;
+  cursor:pointer;
+  z-index:2;
+}
+.modal-close:hover{ background: rgba(0,0,0,.22); }
+
+/* Info-Modal: olivgruen, halbtransparent, Hintergrund bleibt sichtbar */
+.modal-panel--info{
+  width:min(92vw, 460px);
+  background: rgba(69, 77, 92, 0.88);
+  backdrop-filter: blur(3px);
+  color: var(--off-yellow);
+  padding: 2.2em 1.6em 1.6em;
+  display:flex; flex-direction:column; gap:.5em;
+}
+.modal-panel--info .modal-close{ color:var(--off-yellow); background:rgba(254,253,228,.18); }
+.modal-panel--info .modal-close:hover{ background:rgba(254,253,228,.3); }
+.modal-stamp{
+  align-self:flex-start;
+  font-family:'Special Elite', monospace;
+  font-size:.65rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  border:1px solid var(--off-yellow);
+  border-radius:20px;
+  padding:.25em .7em;
+  transform:rotate(-3deg);
+  margin-bottom:.3em;
+}
+.modal-body h3{ margin:.4em 0 0; font-size:1.2rem; color:var(--off-yellow); }
+.modal-body p{ margin:0; font-size:1rem; line-height:1.4; }
+.modal-body p.small{ font-size:.85rem; opacity:.82; }
+.pill-link{
+  align-self:flex-start;
+  margin-top:.4em;
+  font-family:'Special Elite', monospace;
+  font-size:.8rem;
+  color:var(--off-yellow);
+  text-decoration:none;
+  border-bottom:1px solid var(--off-yellow);
+}
+
+/* RSVP-Modal: Postkarte */
+.modal-panel--rsvp{
+  width:min(94vw, 620px);
+  background:var(--off-yellow);
+  padding: clamp(1.3em, 4vw, 2.2em);
+}
+.postcard-header{
+  display:flex; justify-content:space-between; align-items:baseline;
+  border-bottom:1px dashed rgba(0,0,0,.28);
+  padding-bottom:.6em; margin-bottom:1.1em;
+}
+.postcard-title{
+  font-family:'Special Elite', monospace;
+  font-size:1rem; letter-spacing:.08em; text-transform:uppercase;
+  color:var(--slate-dark);
+}
+.postcard-stamp{
+  font-size:1.3rem; color:var(--maroon);
+  border:2px dotted var(--maroon); padding:.1em .3em; transform:rotate(6deg);
+}
+.attend-toggle{
+  border:none; padding:0; margin:0 0 1.2em;
+  display:flex; gap:.7em; flex-wrap:wrap; align-items:center;
+}
+.attend-toggle legend{
+  font-family:'Caveat', cursive; font-size:1.3rem; color:var(--maroon);
+  margin-bottom:.4em; width:100%;
+}
+.radio-pill{
+  display:flex; align-items:center; gap:.4em; font-size:.95rem;
+  border:1px solid var(--slate-dark); border-radius:20px; padding:.4em .9em; cursor:pointer;
+}
+.radio-pill input{ accent-color: var(--olive); }
+
+.field-grid{ display:grid; grid-template-columns:1fr 1fr; gap:.9em 1.1em; margin-bottom:1.2em; }
+.field-wide{ grid-column:1 / -1; }
+.field{ display:flex; flex-direction:column; gap:.3em; font-size:.85rem; color:var(--slate-dark); }
+.field input, .field select, .field textarea{
+  font-family:'Cormorant Garamond', serif; font-size:1rem; padding:.5em .6em;
+  border:1px solid rgba(0,0,0,.25); border-radius:2px; background:#fffdf2; color:var(--ink);
+}
+.field textarea{ resize:vertical; }
+.field-note{
+  font-family:'Caveat', cursive; font-size:1.05rem; color:var(--maroon);
+}
+
+.postcard-submit{
+  margin-top:1.4em; width:100%; padding:.8em;
+  background:var(--olive); color:var(--off-yellow); border:none; border-radius:2px;
+  font-family:'Special Elite', monospace; font-size:.9rem; letter-spacing:.05em; cursor:pointer;
+  transition: background .2s;
+}
+.postcard-submit:hover{ background:var(--olive-dark); }
+.form-status{
+  text-align:center; font-family:'Caveat', cursive; font-size:1.15rem;
+  color:var(--slate-dark); min-height:1.5em; margin:.6em 0 0;
+}
+
+/* ---------- MOBILE: Collage bleibt (Hochformat passt auf Handys) ---------- */
+@media (max-width: 720px){
+  .board{
+    width:97vw;
+    margin:1vh auto 4vh;
+  }
+  /* Hinweistexte auf dem Handy immer sichtbar, damit klar ist: antippbar */
+  .item-hint{ opacity:.9; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ transition-duration:.01ms !important; animation-duration:.01ms !important; }
+}
