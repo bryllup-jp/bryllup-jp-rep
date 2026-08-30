@@ -26,9 +26,6 @@ body{
   font-family:'Cormorant Garamond', serif;
   color:var(--ink);
   min-height:100vh;
-  /* Gleiche Grundfarbe wie <html>, damit iOS Safari beim elastischen
-     Ueberscrollen (Bounce) am oberen/unteren Rand kein weisses Stueck zeigt */
-  background-color:#f3ecc9;
 }
 
 /* ---------- BOARD ---------- */
