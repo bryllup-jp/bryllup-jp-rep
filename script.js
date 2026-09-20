@@ -13,7 +13,8 @@ const stamps = {
   travel: "Directions",
   ceremony: "The plan for the weekend",
   stay: "Accommodations",
-  afterparty: "Gifts & Presents"
+  afterparty: "Gifts & Presents",
+  roros: "About Røros"
 };
 
 function openInfo(key){

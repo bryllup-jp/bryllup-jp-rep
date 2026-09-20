@@ -55,12 +55,14 @@ body{
    auf Eltern-/Kind-Element aufgeteilt: iOS Safari rendert bei einem
    filter:drop-shadow() auf einem Kind eines rotierten Vorfahren faelschlich
    eine rechteckige Box statt der Bildkontur nachzuzeichnen. */
+/* Schattentiefe folgt der Stapelebene (--z): weiter vorn = groesserer,
+   weicherer Schatten. Das gibt der Collage mehr Raeumlichkeit. */
 .item img{
   width:100%;
   height:auto;
   display:block;
   transform: rotate(var(--rot, 0deg));
-  filter: drop-shadow(0 10px 22px rgba(40,35,20,.55));
+  filter: drop-shadow(0 calc(var(--z, 1) * 1.6px + 4px) calc(var(--z, 1) * 2.6px + 9px) rgba(40,35,20,.5));
   transition: transform .25s ease, filter .25s ease;
 }
 .item:hover, .item:focus-visible{
@@ -80,6 +82,15 @@ body{
 .item--building { width:28%; }
 .item--eyes     { width:33%; }
 .item--ticket   { width:32%; }
+.item--roros    { width:26%; }
+
+/* Das Roeros-Foto ist ein echtes Foto ohne eigene Kante - der Polaroid-Rahmen
+   laesst es wie die uebrigen Objekte auf dem Board liegen statt aufgeklebt wirken. */
+.item--roros img{
+  background:#fdfcf4;
+  padding:4.5% 4.5% 15%;
+  border-radius:2px;
+}
 .item--troll{
   width:9%;
   aspect-ratio:1/1;
