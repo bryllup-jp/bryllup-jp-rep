@@ -77,12 +77,10 @@ document.addEventListener('keydown', (e) => {
 
 // ---------- RSVP: Ja/Nein steuert sichtbare Felder ----------
 const detailFields = document.getElementById('rsvp-details');
-const kidsNote = document.getElementById('kids-note');
 function updateDetailVisibility(){
   const attending = document.querySelector('input[name="attending"]:checked').value;
   const isAttending = attending === 'yes';
   detailFields.style.display = isAttending ? 'grid' : 'none';
-  kidsNote.style.display = isAttending ? '' : 'none';
 }
 document.querySelectorAll('input[name="attending"]').forEach(r =>
   r.addEventListener('change', updateDetailVisibility));
