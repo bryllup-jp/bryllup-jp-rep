@@ -13,19 +13,33 @@
 *{ box-sizing:border-box; }
 html,body{ margin:0; width:100%; }
 html{
-  /* Hintergrund aus der PPTX (gestreiftes Papier) - auf <html>, damit es
-     garantiert die volle Viewport-Breite abdeckt (kein background-attachment:fixed,
-     das ist auf mobilen Browsern unzuverlaessig) */
+  /* Grundton der PPTX-Vorlage. Liegt unter der Streifenebene und deckt alles
+     ab, was diese nicht erreicht. */
   background-color:#f3ecc9;
-  background-image:url('images/bg-stripes.png');
-  background-size:100% auto;
-  background-repeat:repeat-y;
   min-height:100%;
 }
 body{
   font-family:'Cormorant Garamond', serif;
   color:var(--ink);
   min-height:100vh;
+}
+/* Gestreiftes Papier als eigene, fixierte Ebene statt als Hintergrund von
+   <html>: mobile Browser ziehen vom propagierten Hintergrund nur die FARBE
+   ueber die Flaechen hinter Statusleiste, Toolbar und Overscroll - das BILD
+   endete an der Element-Box, dort blieben einfarbige Baender. Das Muster ist
+   rein vertikal und ueber die Hoehe gleichfoermig, deshalb faellt position:fixed
+   beim Scrollen nicht auf. Der Ueberstand nach oben/unten deckt den
+   Overscroll-Bereich mit ab. */
+body::before{
+  content:"";
+  position:fixed;
+  left:0; right:0;
+  top:-20vh; bottom:-20vh;
+  background-image:url('images/bg-stripes.png');
+  background-size:100% auto;
+  background-repeat:repeat-y;
+  z-index:-1;
+  pointer-events:none;
 }
 
 /* ---------- BOARD ---------- */
