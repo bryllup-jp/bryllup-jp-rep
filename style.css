@@ -13,9 +13,11 @@
 *{ box-sizing:border-box; }
 html,body{ margin:0; width:100%; }
 html{
-  /* Grundton der PPTX-Vorlage. Liegt unter der Streifenebene und deckt alles
-     ab, was diese nicht erreicht. */
-  background-color:#f3ecc9;
+  /* Liegt unter der Streifenebene und faerbt alles, was diese nicht erreicht:
+     die Browser-Leisten oben und unten auf dem Handy. Bewusst ein Grauton aus
+     der Palette statt Papierfarbe - so wirken die Raender wie ein Rahmen und
+     nicht wie ein Darstellungsfehler. Alternative: var(--slate-dark). */
+  background-color:var(--slate);
   min-height:100%;
 }
 body{
