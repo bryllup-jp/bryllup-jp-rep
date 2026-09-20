@@ -13,11 +13,15 @@
 *{ box-sizing:border-box; }
 html,body{ margin:0; width:100%; }
 html{
-  /* Liegt unter der Streifenebene und faerbt alles, was diese nicht erreicht:
-     die Browser-Leisten oben und unten auf dem Handy. Bewusst ein Grauton aus
-     der Palette statt Papierfarbe - so wirken die Raender wie ein Rahmen und
-     nicht wie ein Darstellungsfehler. Alternative: var(--slate-dark). */
-  background-color:var(--slate);
+  /* Streifen zusaetzlich hier, nicht nur auf der fixierten Ebene in
+     body::before: so ist das Muster auf jeden Fall ueberall dort, wo die Seite
+     selbst zeichnet, und die fixierte Ebene deckt zusaetzlich Safe Areas und
+     Overscroll ab. Beide nutzen dieselbe Breite und Ausrichtung, das Muster ist
+     vertikal gleichfoermig - sie koennen sich also nicht sichtbar versetzen. */
+  background-color:#f3ecc9;
+  background-image:url('images/bg-stripes.png');
+  background-size:100% auto;
+  background-repeat:repeat-y;
   min-height:100%;
 }
 body{
