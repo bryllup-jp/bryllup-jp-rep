@@ -16,20 +16,18 @@
   <button class="item item--envelope" style="--x:51%; --y:20%; --rot:-1deg; --z:6;"
           data-open="rsvp" aria-haspopup="dialog">
     <img src="images/envelope.png" alt="Einladung - hier antworten">
-    <span class="item-hint">antippen zum Antworten</span>
   </button>
 
   <!-- Kassette „wedding playlist" -> Link zur Playlist -->
   <a class="item item--cassette" style="--x:17%; --y:46%; --rot:-2deg; --z:3;"
      href="https://open.spotify.com/playlist/DEINE_PLAYLIST_ID" target="_blank" rel="noopener">
     <img src="images/cassette.png" alt="Zur Hochzeits-Playlist">
-    <span class="item-hint">Song vorschlagen <svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
   </a>
 
   <!-- Polaroid -> Wir / Willkommen -->
   <button class="item item--polaroid" style="--x:46%; --y:50%; --rot:1deg; --z:7;"
           data-open="us" aria-haspopup="dialog">
-    <img src="images/polaroid.png" alt="Wir zwei">
+    <img src="images/polaroid.png" alt="Welcome">
   </button>
 
   <!-- LIPP-Flyer -> Zeremonie & Dinner -->
@@ -52,16 +50,16 @@
   </button>
   <audio id="troll-audio" src="audio/march-of-the-trolls.mp3" preload="none"></audio>
 
-  <!-- Silber-Dose -> Afterparty -->
+  <!-- Silber-Dose -> Gifts & Presents -->
   <button class="item item--eyes" style="--x:80%; --y:69%; --rot:3deg; --z:1;"
           data-open="afterparty" aria-haspopup="dialog">
-    <img src="images/eyes.png" alt="Afterparty">
+    <img src="images/eyes.png" alt="Gifts & Presents">
   </button>
 
   <!-- Ticket -> Anreise -->
   <button class="item item--ticket" style="--x:18%; --y:77%; --rot:-3deg; --z:1;"
           data-open="travel" aria-haspopup="dialog">
-    <img src="images/ticket.png" alt="Anreise">
+    <img src="images/ticket.png" alt="Directions">
   </button>
 
 </main>
@@ -169,29 +167,72 @@
 
 <!-- Inhalte fuer die Info-Modals -->
 <template id="content-us">
-  <h3>Schoen, dass ihr da seid</h3>
-  <p>Wir freuen uns riesig, mit euch zu feiern. Hier findet ihr nach und nach alle Infos rund um unseren Tag - klickt euch einfach durch die Karten.</p>
+  <h3>Happy to welcome you here</h3>
+  <p>You will find all the information around the wedding on this website - just click on the cards.</p>
+  <p style="margin-top:.6em;">More information will follow.</p>
+  <p style="margin-top:.6em;">And make sure to fill out the RSVP.</p>
 </template>
 <template id="content-travel">
-  <h3>Wie ihr zu uns findet</h3>
-  <p>Der naechste Bahnhof ist [Bahnhof], von dort fahren Shuttles ab 14 Uhr. Parkplaetze gibt es direkt am [Ort].</p>
-  <p class="small">Adresse: [Strasse Hausnummer, PLZ Ort]</p>
-  <a class="pill-link" href="https://maps.google.com/?q=" target="_blank" rel="noopener">Route oeffnen <svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  <h3>How to get there</h3>
+
+  <h3>By train</h3>
+  <p>Røros has a train station - you can reach it from <a class="pill-link" href="https://maps.app.goo.gl/bZhLhcpCuGEvcPis5" target="_blank" rel="noopener">Oslo trainstation <svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a> or <a class="pill-link" href="https://maps.app.goo.gl/tkhj47NVG5HbTFRn8" target="_blank" rel="noopener">Oslo airport (Gardemoen) <svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>.</p>
+
+  <h3>By plane</h3>
+  <p>Røros has an airport - you can reach it from Oslo airport: DAT has up to two connections per day: <a class="pill-link" href="https://book.dat.dk/" target="_blank" rel="noopener">book.dat.dk <svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a> (not yet available for July) - around 40-50€</p>
+  <p style="margin-top:.6em;">or fly to <a class="pill-link" href="https://maps.app.goo.gl/zGrzTHEcDqHCahzZA" target="_blank" rel="noopener">Trondheim <svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a> and then take the bus/train - we have never tried this option though</p>
+
+  <h3>By car from Germany</h3>
+  <p>In the past, we took the car and the ferry from Hirtshals to Kristiansand - very beautiful - reach out if you need a place to sleep - e.g. in Oslo - on the way.</p>
+  <p class="small">Other options: Ferry from Kiel or the Øresund bridge.</p>
 </template>
 <template id="content-ceremony">
-  <h3>16:00 Uhr - Trauung</h3>
-  <p>[Kirche / Location], [Strasse Hausnummer, PLZ Ort]. Bitte seid 15 Minuten vorher da.</p>
-  <h3>19:00 Uhr - Dinner</h3>
-  <p>Im Anschluss feiern wir im [Venue-Name] weiter - nur zwei Gehminuten entfernt.</p>
+  <h3>02.07.2027</h3>
+  <div class="schedule-item">
+    <p class="event-time">18:00 - Rehearsal Dinner</p>
+    <p class="event-location">Location: TBD - Røros</p>
+  </div>
+
+  <h3>03.07.2027</h3>
+  <div class="schedule-item">
+    <p class="event-time">13:00 - Wedding</p>
+    <p class="event-location">Location: <a class="pill-link" href="https://www.google.com/maps/place/Kirche+von+R%C3%B8ros/@62.5773112,11.3877784,291m/data=!3m2!1e3!4b1!4m6!3m5!1s0x466c64dd68ec4e9f:0xadd73865b478598!8m2!3d62.5773112!4d11.3877784!16s%2Fm%2F0gg9wrt?entry=ttu&amp;g_ep=EgoyMDI2MDkxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener">Kjerkgata 39, 7374 Røros, Norwegen <svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+    <p class="small">Shuttles will be provided if you don't have a car.</p>
+  </div>
+
+  <div class="schedule-item">
+    <p class="event-time">16:00 - Dinner &amp; Party</p>
+    <p class="event-location">Location: <a class="pill-link" href="https://maps.app.goo.gl/pq7tRZ9vjoYTMdp97" target="_blank" rel="noopener">Skjevdalen <svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+    <p class="small">Several shuttles will be provided to accommodations - around 30 spots available at the venue in shared rooms.</p>
+  </div>
+
+  <h3>04.07.2027</h3>
+  <div class="schedule-item">
+    <p class="event-time">13:00 - Picnic</p>
+    <p class="event-location">Location: <a class="pill-link" href="https://maps.app.goo.gl/a4jyg9QZnLjwHY218" target="_blank" rel="noopener">Åslia <svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+  </div>
+
+  <p class="event-location" style="margin-top:1.3em;">All locations in one map:<br><a class="pill-link" href="https://www.google.com/maps/d/u/0/edit?mid=1gJ29C2fopfUNNOS9-3gITzQrvzaF4TE&amp;usp=sharing" target="_blank" rel="noopener">Open map <svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
 </template>
 <template id="content-stay">
-  <h3>Uebernachten</h3>
-  <p>Vor Ort gibt es Stellplaetze fuer Zelt und Van sowie ein paar Huetten. In der Naehe liegt ausserdem das [Hotelname].</p>
-  <p class="small">Buchungslinks und Details tragen wir hier bald ein.</p>
+  <h3>At the venue - Skjevdalen</h3>
+  <ul>
+    <li>There are 30 spots in shared rooms - please reach out if you are interested.</li>
+    <li>There is the possibility to camp or park your van there as well.</li>
+  </ul>
+
+  <h3>Hutts</h3>
+  <p>There are several hutts in the area. We recommend to coordinate and book them in groups. You can find them on <a class="pill-link" href="https://www.airbnb.de/s/Roros--R%C3%B8ros--Norwegen/homes?refinement_paths%5B%5D=%2Fhomes&amp;place_id=ChIJO4MWCt1kbEYRqx0BCZWD67E&amp;location_bb=QnpM5EE2K7hCekogQTYgqw%3D%3D&amp;acp_id=t-g-ChIJO4MWCt1kbEYRqx0BCZWD67E&amp;date_picker_type=calendar&amp;checkin=2027-07-01&amp;checkout=2027-07-05&amp;search_type=autocomplete_click" target="_blank" rel="noopener">AirBnB <svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a> or on the Norwegian site <a class="pill-link" href="https://www.finn.no/reise/feriehus-hytteutleie/resultat/?lat_sw=62.10268&amp;lng_sw=10.599694&amp;lat_ne=62.721755&amp;lng_ne=12.342798&amp;nrFUSAds=2&amp;country=Norge&amp;city=R%C3%B8ros&amp;no_of_bedrooms_from=0&amp;no_of_beds_from=0&amp;booking_from=2027-07-01&amp;booking_to=2027-07-05" target="_blank" rel="noopener">Finn.no <svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>.</p>
+
+  <h3>Hotels</h3>
+  <p>Most hotels are located directly in <a class="pill-link" href="https://www.booking.com/searchresults.de.html?ss=R%C3%B8ros&amp;ssne=R%C3%B8ros&amp;ssne_untouched=R%C3%B8ros&amp;efdco=1&amp;label=roros-v_uaFP7gs8oSq75_Vb1dFAS438072720361%3Apl%3Ata%3Ap1%3Ap2%3Aac%3Aap%3Aneg%3Afi%3Atikwd-350717157323%3Alp9043095%3Ali%3Adec%3Adm%3Appccp%3DUmFuZG9tSVYkc2RlIyh9YcLgEXIAJSu2xZLVMoesqNk&amp;aid=1610679&amp;lang=de&amp;sb=1&amp;src_elem=sb&amp;src=city&amp;dest_id=-276049&amp;dest_type=city&amp;checkin=2027-07-01&amp;checkout=2027-07-05&amp;group_adults=2&amp;no_rooms=1&amp;group_children=0&amp;sb_lp=1" target="_blank" rel="noopener">Røros <svg class="icon-arrow" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>.</p>
 </template>
 <template id="content-afterparty">
-  <h3>Die Nacht gehoert uns</h3>
-  <p>Ab 22 Uhr geht's weiter in den Huetten direkt nebenan - Feuerkorb, Musik, gute Gesellschaft.</p>
+  <h3>Please just come</h3>
+  <p>We know it is a lot to come to Norway for the wedding. This is the best gift already!</p>
+  <p style="margin-top:.6em;">If someone needs financial support to afford the trip then reach out to us and we will find a way.</p>
+  <p style="margin-top:.6em;">Anyone who still wants to give something: we would then use the money to cover the expenses for financial support so everybody can be at the wedding.</p>
+  <p class="small" style="margin-top:.9em;">PS: we might contact you though to bring some drinks to Norway :)</p>
 </template>
 
 <script src="script.js"></script>

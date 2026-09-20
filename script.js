@@ -9,11 +9,11 @@ const infoStamp = document.getElementById('info-stamp');
 const rsvpOverlay = document.getElementById('rsvp-overlay');
 
 const stamps = {
-  us: "Willkommen",
-  travel: "Anreise",
-  ceremony: "Zeremonie & Dinner",
-  stay: "Uebernachten",
-  afterparty: "Afterparty"
+  us: "Welcome",
+  travel: "Directions",
+  ceremony: "The plan for the weekend",
+  stay: "Accommodations",
+  afterparty: "Gifts & Presents"
 };
 
 function openInfo(key){
